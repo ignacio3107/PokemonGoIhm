@@ -19,7 +19,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     let mapDistance : CLLocationDistance = 300
     
-    let captureDistance : CLLocationDistance = 150
+    let captureDistance : CLLocationDistance = 1500
     
     var pokemonSpawnTimer : TimeInterval = 9
     
@@ -121,18 +121,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if let coordinate = self.manager.location?.coordinate{
             if MKMapRectContainsPoint(mapView.visibleMapRect, MKMapPointForCoordinate(coordinate)) { //Determina si la zona visible de un mapa contiene o no contiene un punto
                 print("Podemos capturar el pokemon")
+                //instanciar viewController que mostrarà la escena y presentarlo pasando el pokemon pulsado como parámetro
+                let vc = BattleViewController()
+                vc.pokemon = (view.annotation! as! PokemonAnnotation).pokemon
+                self.present(vc, animated: true, completion: nil)
+                
             }else{
                 print("Demasiado lejos para cazar el pokemon")
             }
         }
         
         
-        
     }
-    
-
-    
-    
     
     
     @IBAction func updateUserLocation(_ sender: UIButton) {

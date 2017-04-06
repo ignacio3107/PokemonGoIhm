@@ -18,6 +18,8 @@
 		E943E16B1E8DC76E005B4943 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943E16A1E8DC76E005B4943 /* CoreDataHelper.swift */; };
 		E943E16D1E8DE1CB005B4943 /* PokemonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943E16C1E8DE1CB005B4943 /* PokemonTableViewCell.swift */; };
 		E943E16F1E8EC29E005B4943 /* PokemonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943E16E1E8EC29E005B4943 /* PokemonAnnotation.swift */; };
+		E943E1711E95775C005B4943 /* BattleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943E1701E95775C005B4943 /* BattleScene.swift */; };
+		E943E1731E95783A005B4943 /* BattleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E943E1721E95783A005B4943 /* BattleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		E943E16A1E8DC76E005B4943 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		E943E16C1E8DE1CB005B4943 /* PokemonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonTableViewCell.swift; sourceTree = "<group>"; };
 		E943E16E1E8EC29E005B4943 /* PokemonAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonAnnotation.swift; sourceTree = "<group>"; };
+		E943E1701E95775C005B4943 /* BattleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleScene.swift; sourceTree = "<group>"; };
+		E943E1721E95783A005B4943 /* BattleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 			children = (
 				E943E1501E8D7C7B005B4943 /* AppDelegate.swift */,
 				E943E1521E8D7C7B005B4943 /* ViewController.swift */,
+				E943E1721E95783A005B4943 /* BattleViewController.swift */,
+				E943E1701E95775C005B4943 /* BattleScene.swift */,
 				E943E1681E8DC473005B4943 /* PokedexViewController.swift */,
 				E943E16A1E8DC76E005B4943 /* CoreDataHelper.swift */,
 				E943E16C1E8DE1CB005B4943 /* PokemonTableViewCell.swift */,
@@ -170,6 +176,8 @@
 				E943E1691E8DC473005B4943 /* PokedexViewController.swift in Sources */,
 				E943E16D1E8DE1CB005B4943 /* PokemonTableViewCell.swift in Sources */,
 				E943E1531E8D7C7B005B4943 /* ViewController.swift in Sources */,
+				E943E1731E95783A005B4943 /* BattleViewController.swift in Sources */,
+				E943E1711E95775C005B4943 /* BattleScene.swift in Sources */,
 				E943E1511E8D7C7B005B4943 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
