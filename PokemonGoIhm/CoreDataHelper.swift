@@ -34,7 +34,7 @@ func createAllThePokemons(){
     createPokemon(name: "Venonat", with: "venonat")
     createPokemon(name: "Weedle", with: "weedle")
     
-    
+    //Sirve para persistir los datos
     (UIApplication.shared.delegate as! AppDelegate).saveContext()
 
 }

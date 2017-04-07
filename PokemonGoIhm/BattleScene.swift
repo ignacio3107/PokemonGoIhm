@@ -32,6 +32,16 @@ class BattleScene: SKScene, SKPhysicsContactDelegate {
     var touchPoint : CGPoint = CGPoint()
     var canThrowPokeball = false
     
+    var pokemonCaught = false
+    
+    var startCount = true
+    var maxTime = 10
+    var myTime = 15
+    
+    var printTime = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
+    
+    
+    
     //Metodo que inicia una escena
     override func didMove(to view: SKView) {
         let bgImage = SKSpriteNode(imageNamed: "background")
@@ -40,6 +50,14 @@ class BattleScene: SKScene, SKPhysicsContactDelegate {
         bgImage.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         bgImage.zPosition = -1
         self.addChild(bgImage)
+        
+        self.printTime.position = CGPoint(x: self.size.width/2.0, y: self.size.height * 0.9)
+        self.printTime.fontSize = 50
+        self.addChild(self.printTime)
+        
+        //Muestra la imagen de batalla al comenzar la escena
+        self.showMessageWith(imageNamed: "battle")
+        
         
         
         //Añadimos al pokemon y la pokeball un segundo despues de visualizar la escena de la batalla
@@ -139,10 +157,72 @@ class BattleScene: SKScene, SKPhysicsContactDelegate {
         let distance = CGVector(dx: self.touchPoint.x - self.pokeballSprite.position.x, dy: self.touchPoint.y - self.pokeballSprite.position.y)
         let velocity = CGVector(dx: distance.dx / dt, dy: distance.dy / dt)
         self.pokeballSprite.physicsBody!.velocity = velocity
+    
+    }
+    
+    
+    
+    
+    //Mètodo que se encarga de saber si dos elementos han contactado en pantalla
+    func didBegin(_ contact: SKPhysicsContact) {
+         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        switch contactMask {
+        case KPokemonCategory|KPokeballCategory:
+            print("Capturado...")
+            self.pokemonCaught = true
+            endGame()
+        default:
+            return
+        }
         
         
+    }
+    
+    //Esta funciòn se ejecuta automàticamente 60 veces por segundo 60 FPS
+    override func update(_ currentTime: TimeInterval) {
+        if self.startCount{
+            self.maxTime = Int(currentTime) + self.maxTime
+            self.startCount = false
+        }
+        self.myTime = self.maxTime - Int(currentTime)
+        self.printTime.text = "\(self.myTime)"
+        if self.myTime <= 0 {
+            endGame()
+        }
+    }
+    
+    func endGame() {
+        self.pokemonSprite.removeFromParent()
+        self.pokeballSprite.removeFromParent()
         
+        if self.pokemonCaught{
+            print("PokemonCapturado")
+            self.pokemon.timesCaught += 1
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            self.showMessageWith(imageNamed: "gotcha")
+        }else{
+            print("Me he quedado sin tiempo... :(")
+            self.showMessageWith(imageNamed: "footprints")
+        }
         
+        //Mandar la notificacion de cerrar y regresar al mapa un segundo despues de capturar al pokemon o quedarme sin tiempo.
+        self.perform(#selector(endBattle), with: nil, afterDelay: 1.0)
+    }
+    
+    func showMessageWith(imageNamed: String){
+        let message = SKSpriteNode(imageNamed: imageNamed)
+        message.size = CGSize(width: 150, height: 150)
+        message.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        self.addChild(message)
+        
+        message.run(SKAction.sequence([SKAction.wait(forDuration: 1.0), SKAction.removeFromParent()])) //Se ejecuta secuencia de esperar un segundo y despues desaparecer..
+    }
+    
+    
+    //Lanza una notificación a BattleViewController
+    func endBattle(){
+        NotificationCenter.default.post(name: NSNotification.Name("closeBattle"), object: nil)
     }
     
     

@@ -35,8 +35,8 @@ class BattleViewController: UIViewController {
         
         
         
-        
-        
+        //Sirve para que BattleViewController estè constantemente observando si alguien manda una notificación con el nombre "closeBattle"
+        NotificationCenter.default.addObserver(self, selector: #selector(returnToMapViewController), name: NSNotification.Name("closeBattle"), object: nil)
         
         
         
@@ -44,6 +44,12 @@ class BattleViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    
+    func returnToMapViewController(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
